@@ -1,14 +1,19 @@
 plugins {
     // id for library
+    id 'java-library'
     // id for maven to publish jar to local repository
+    id 'maven-publish'
 }
 
 java {
 // provide sourceCompatibility
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
 // provide repository, where required dependencies are located
+    mavenCentral()
 }
 
 publishing {
@@ -17,6 +22,10 @@ publishing {
 // provide groupId
 // provide artifactId
 // provide version
+            groupId = 'com.epam.utils'
+            artifactId = 'StringUtils'
+            version = '1.0'
+
 
             from components.java
         }
@@ -24,10 +33,15 @@ publishing {
 }
 
 //add Apache Apache Commons Lang 3.10 (or higher) dependency
+dependencies {
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
+
+}
 
 jar {
     manifest {
         //provide manifest with such attributes as 'Implementation-Title', 'Implementation-Version'
+        attributes('Implementation-Title': 'StringUtils', 'Implementation-Version': '1.0')
     }
 }
 
